@@ -1,0 +1,32 @@
+not as service:
+path create ===>C:\data\db
+mongod 
+mongod --help
+-------------------------------------
+Any instance run:onther port
+mongod --port 27018
+mongo mongodb://127.0.0.1:27018
+---------------------------------------
+Storage File:
+mongod --dbpath C:\mogo\file 
+mongod --dbpath C:\mogo\file --directoryperdb ====>folder for db
+----------------------------------
+Log File Storage:
+mongod --dbpath C:\mogo\file --directoryperdb --logpath C:\mogo\log\log.txt
+----------------------------------------------------------------------------
+install Service:
+****Force path log****
+Command Prompt Run Admin
+mongod --dbpath C:\mogo\file --directoryperdb --wiredTigerDirectoryForIndexes  --logpath C:\mogo\log\log.log --install
+mongod --remove ====>remove service
+mongod --dbpath C:\mogo\file --directoryperdb --logpath C:\mogo\log\log.log --install --serviceName MyMongoDB --serviceDisplayName mongoali
+mongod --remove --serviceName MyMongoDB
+----------------------------------------------------------------------------
+--serviceName MyMongoDB
+db.shutdownServer()
+----------------------------------------------------------------------------
+Config By File:
+mongod --config C:\Users\alino\OneDrive\Desktop\MongoDb\File\1.cfg --install
+net start MongoDB
+-----------------------------------------------------------------------------
+db.help()

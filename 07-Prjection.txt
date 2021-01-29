@@ -1,0 +1,8 @@
+mongoimport C:\Users\alino\OneDrive\Desktop\MongoDb\File\movie-json-data-master\json\movies-coming-soon.json -d movies -c movie --jsonArray --drop
+db.movie.find({genres:"Drama"},{title:1,genres:1})
+
+db.movie.find({genres:"Drama"},{title:1,"genres.$":1}) ===========>First array
+db.movie.find({genres:"Drama"},{title:1,"genres":{$slice:2}}) ===========> 2 show from genres
+db.movie.find({genres:"Drama"},{title:1,"genres":{$slice:[1,2]}}) =============>1 skip 2 show
+db.movie.find({genres:"Drama"},{title:1,"genres":{$slice:-1}}) ==========>1 end
+db.movie.find({genres:"Drama"},{title:1,"genres":{$elemMatch:{$eq:"Family"}}})

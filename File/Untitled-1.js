@@ -1,0 +1,1 @@
+db.teacher.insertMany([{_id:1,name:"alinouri"},{_id:2,name:"rezaakbari"},{_id:3,name:"hsanomidi"}])

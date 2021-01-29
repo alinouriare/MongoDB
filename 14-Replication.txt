@@ -1,0 +1,47 @@
+mongod --remove --serviceName MongoDB
+mongod --dbpath C:\mogo\file --directoryperdb --wiredTigerDirectoryForIndexes  --logpath C:\mogo\log\log.log --replSet orgali --port 27017  --install
+docker pull mongo
+docker run -p 27018:27017 --name m-mongo -d mongo  --replSet orgali
+docker exec -it d390a730803 bash
+let rsConfig={_id:"orgali",members:[{_id:0,host:"localhost:27017"},{_id:1,host:"localhost:27018"}]}
+rs.initiate(rsConfig)
+rs.status()       
+-----------------------------------------------------------------------------------------------
+SECONDARY>      =>not write
+db.isMaster()
+------------------------------
+priority =========>0 to 100
+if 0 not primary
+default 1
+---------------------
+hidden
+default false
+app out not view if true best from backup 
+-------------------------------
+--smalfiles --oplogSize 200
+mongo --port 27018
+mongod --dbpath C:\rep1\file --directoryperdb --wiredTigerDirectoryForIndexes  --logpath C:\rep1\log\log1.log --replSet orgali --port 27017 
+mongod --dbpath C:\rep2\file --directoryperdb --wiredTigerDirectoryForIndexes  --logpath C:\rep2\log\log2.log --replSet orgali --port 27018
+mongod --dbpath C:\rep3\file --directoryperdb --wiredTigerDirectoryForIndexes  --logpath C:\rep3\log\log3.log --replSet orgali --port 27019
+let rsConfig={_id:"orgali",members:[{_id:0,host:"localhost:27017"},{_id:1,host:"localhost:27018"},{_id:2,host:"localhost:27019"}]}
+rs.initiate(rsConfig)
+rs.status()  
+SECONDARY> rs.slaveOk()
+rs.config()  =>version important
+mongod --dbpath C:\rep4\file --directoryperdb --wiredTigerDirectoryForIndexes  --logpath C:\rep4\log\log4.log --replSet orgali --port 27020
+rs.add("localhost:27020")
+rs.config()
+rs.status()  
+rs.remove("localhost:27020")
+var config=rs.config()
+config.mghdar.... =value
+rs.reconfig(config)
+--------------------------
+rs.addArb()  ======>add nod not data
+n+1 just
+
+capped ===> size collection 20 onsor 
+-------------------------
+Rollback ==========> oplog   primary(down oplog 120) ---secondery (primary oplog 121 122 123 ... ) ---up primary
+300 mb error
+30 min error

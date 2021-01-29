@@ -1,0 +1,16 @@
+db.user.insert({"name":"ali","age":34})
+-------------------------------------------------
+db.user.insertMany([{_id:1,"name":"reza","age":38},{_id:2,"name":"hamid","age":34}])
+db.user.insertMany([{_id:3,"name":"reza3","age":38},{_id:2,"name":"hamid","age":34},{_id:4,"name":"hamid4","age":34}],{ordered:false})
+--------------------------------------------------
+option insert w:
+0 ack not import
+db.user.insertOne({_id:5,"name":"reza"},{w:0})
+1 ack primary just import just ram
+3 ack primary and 2secondery import just ram
+3 .....&
+----------------------------------------------------
+j true/false 
+journal:
+db.user.insertOne({_id:6,"name":"reza"},{w:1,j:true})
+------------------------------------------------------

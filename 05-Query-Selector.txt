@@ -1,0 +1,38 @@
+db.inventory.insertMany( [
+  { item: "journal", status: "A", size: { h: 14, w: 21, uom: "cm" }, instock: [ { warehouse: "A", qty: 5 } ] },
+  { item: "notebook", status: "A",  size: { h: 8.5, w: 11, uom: "in" }, instock: [ { warehouse: "C", qty: 5 } ] },
+  { item: "paper", status: "D", size: { h: 8.5, w: 11, uom: "in" }, instock: [ { warehouse: "A", qty: 60 } ] },
+  { item: "planner", status: "D", size: { h: 22.85, w: 30, uom: "cm" }, instock: [ { warehouse: "A", qty: 40 } ] },
+  { item: "postcard", status: "A", size: { h: 10, w: 15.25, uom: "cm" }, instock: [ { warehouse: "B", qty: 15 }, { warehouse: "C", qty: 35 } ] }
+]);
+--------------------------------------------------------------------
+db.inventory.findOne({"status":"A"})
+db.inventory.findOne({"size.h":10})
+--------------------------------------------------------------------
+db.inventory.find({"size.h":{$eq:8.5}}) =====>==
+db.inventory.find({"size.w":{$lt:15}}).count() =====> min as
+db.inventory.find({"size.w":{$gt:15}}).count() =====> max as 
+db.inventory.find({"size.w":{$lte:15}}).count() =====> min as equal
+db.inventory.find({"size.w":{$gte:15}}).count() =====> max as equal
+db.inventory.find({"size.w":{$ne:11}}).count()======>not equal
+----------------------------------------------------------------------
+mongoimport C:\Users\alino\OneDrive\Desktop\MongoDb\File\movie-json-data-master\json\movies-coming-soon.json -d movies -c movie --jsonArray --drop
+db.movie.find({"imdbRating":{$lt:5}}).count()
+db.movie.find({"genres":["Horror","Thriller"]}).count()
+db.movie.find({"genres":{$in:["Horror","Thriller"]}}).count()
+db.movie.find({"genres":{$nin:["Horror","Thriller"]}}).count()
+
+db.movie.find( { $and: [ { id: { $gt: "10" } }, { year: { $eq: "2018" } } ] } ).count()
+
+db.movie.find( { $and:  [ {$or:[{genres:"Action"},{averageRating:"0"}]},       { id: { $gt: "10" } }, { year: { $eq: "2018" } } ] } ).count()
+db.movie.find({id:{$not:{$gt:"20"}}}).count()
+---------------------------------------------------------------------------------
+db.movie.find({id:{$exists:false}}).count() =========>exists field
+db.movie.find({id:{$type:"int"}}).count() =========>check exists type
+------------------------------------------------------------------------------------
+db.movie.find({posterurl:{$regex:"/images/"}}).count()     ======>   search in text example like
+----------------------------------------------------------------------------------------------
+db.movie.find({actors:{$size:2}}).count()
+db.movie.find({actors:{$all:["Rachel McAdams"]}}).count() =========>sort array not import
+--------------------------------------------------------------------------------------------------
+ db.test.find({aary:{$elemMatch:{a:2,b:2}}}).pretty() search aaray object

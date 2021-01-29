@@ -1,0 +1,24 @@
+mongoimport C:\Users\alino\OneDrive\Desktop\MongoDb\File\movie-json-data-master\json\movies-coming-soon.json -d movies -c movie --jsonArray --drop
+------------
+let myCursor=db.movie.find()
+myCursor.next() one and one
+myCursor.hasNext()
+-------------------------------------
+db.movie.find().limit(2).pretty()===========>limit
+db.movie.find().skip(10).limit(2).pretty()
+db.movie.find().sort({id:1}).skip(10).limit(20).pretty() ============>sort ace -1 dec
+db.movie.find().sort({id:1,averageRating:1}).pretty()
+----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+

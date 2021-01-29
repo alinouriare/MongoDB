@@ -1,0 +1,101 @@
+mongoimport "C:\Users\alino\OneDrive\Desktop\MongoDb\File\students.json" -d mo -c students --jsonArray --drop
+db.students.find({"name":"Kam Senters"})
+db.students.find({"name":"Kam Senters"}).explain()
+db.students.find({"name":"Kam Senters"}).explain("executionStats")
+-------------------
+var exp=db.students.explain("executionStats")
+db.students.find({"name":"Kam Senters"}).explain("executionStats")
+-------------------
+db.students.createIndex({"name":1})
+Array on createIndex per key ========>in equal not between
+ 
+sql sort in tempdb
+Sort:memory and index ========>mongodb 32 mb orderby memory not index
+
+sort by filed =======>create index
+--------------------------------------------------------------
+
+index
+
+
+db.books.createIndex( { price: 1 } )
+
+
+drop index
+
+db.books.dropIndex( { price: -1 } )
+
+
+
+background index
+
+db.books.createIndex( { price: 1 }, { background: true } )====>lock table not best
+
+
+
+
+
+compound index
+db.book.createIndex({"name":1,price:1})
+db.books.find().sort( { "name": -1, "price": 1 })
+
+-az 2 index bayd fargh konam yeke dec ace bashe-
+---------------------------
+array index
+multi key index
+---------------------------
+text index
+db.news.createIndex({body:"text"})
+https://docs.mongodb.com/manual/reference/text-search-languages/
+-------------------------------
+Hashed index
+
+db.books.createIndex( { name: "hashed" } )
+between no suport
+--------------------------------------------------
+
+TTL
+column from date just
+
+db.eventlog.createIndex( { "lastModifiedDate": 1 }, { expireAfterSeconds: 3600 } )
+
+-----------------------------------------------------------------
+Partial Index
+
+if on index
+relation not expersion if
+db.restaurants.createIndex(
+   { cuisine: 1, name: 1 },
+   { partialFilterExpression: { rating: { $gt: 5 } } }
+)
+-------------------------------------------------
+Sparse
+
+db.addresses.createIndex( { "xmpp_id": 1 }, { sparse: true } )
+if in not column in collection null
+Sparse Index not Index vs not null
+best =============> use from Partial Index not column indext not
+---------------------------------------------------------------
+
+Unique
+
+db.members.createIndex( { "user_id": 1 }, { unique: true } )
+
+----------------------------------------------------
+
+hint
+force use from index
+
+db.users.find().hint( { age: 1 } )
+
+-------------------------------------------------------------------
+
+
+
+named index
+
+
+db.collection.createIndex(
+   { category: 1 },
+   { name: "categoryIx" }
+)

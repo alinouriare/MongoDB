@@ -1,0 +1,7 @@
+db.numb.insertOne({number:NumberInt(1)})
+db.numb.stats()
+db.numb.updateOne({},{$set:{number:NumberLong(5000000000)}})
+
+int max form rang loop
+long max from rang error
+ db.numb.insertOne({number:NumberDecimal(1.55)})

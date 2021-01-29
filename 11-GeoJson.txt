@@ -1,0 +1,4 @@
+db.location.insertOne({"name":"chargon",location:{"type":"Point",coordinates:[51.4423304,35.7313193]}})
+db.location.createIndex({"location":"2dsphere"})====>index
+db.location.find({location:{$near:{$geometry:{type:"Point",coordinates:[51.4196367,35.7351219]}}}})
+db.location.find({location:{$near:{$geometry:{type:"Point",coordinates:[51.449205,35.6409052]},$maxDistance:100}}})

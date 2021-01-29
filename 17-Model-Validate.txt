@@ -1,0 +1,105 @@
+db.teacher.insertMany([{_id:1,name:"alinouri"},{_id:2,name:"rezaakbari"},{_id:3,name:"hsanomidi"}])
+db.course.insertMany([{_id:1,name:"sql",teacher:[1]},{_id:2,name:".net",teacher:[1,2]},{_id:3,name:"mongo",teacher:[1,3]}])
+
+join left
+db.course.aggregate([{$lookup:{from:"teacher",localField:"teacher",foreignField:"_id",as:"CourseTeachersDetail"}}])
+--------------------------------------------------------
+db.createCollection("user01",{validator:{
+    $jsonSchema:{
+        bsonType:"object",
+        required:["name","age"]
+    }
+}, validationAction: "error",validationLevel :"strict"})
+error=======>
+db.user01.insertOne({name:"ali"})
+ok===
+db.user01.insertOne({name:"ali",age:34})
+--------------------------------
+
+db.createCollection("users", 
+    { 
+        validator: {
+            $jsonSchema: {
+                bsonType: "object",
+                required: [ "firstName", "lastName", "address" ],
+                properties:{
+                    firstName:{
+                        bsonType:"string",
+                        description: "firstname must be a string and is required"
+                    },
+                    lastName:{
+                        bsonType:"string",
+                        description: "lastname must be a string and is required"
+                    },
+                    address:{
+                        bsonType: "object",
+                        required: [ "proviance", "city", "addressline","phoneNum" ],
+                        properties:{
+                            proviance:{
+                                bsonType:"string",
+                                description: "proviance must be a string and is required" 
+                            },
+                            city:{
+                                bsonType:"string",
+                                description: "proviance must be a string and is required" 
+                            },
+                            addressline:{
+                                bsonType:"string",
+                                description: "proviance must be a string and is required" 
+                            },
+                            phoneNum:{
+                                bsonType:"string",
+                                description: "proviance must be a string and is required" 
+                            }
+                        }
+                    }
+                }
+            }
+        } 
+    })
+-------------------
+
+    db.runCommand({
+            collMod:"users",
+            validator: {
+                $jsonSchema: {
+                    bsonType: "object",
+                    required: [ "firstName", "lastName", "address" ],
+                    properties:{
+                        firstName:{
+                            bsonType:"string",
+                            description: "firstname must be a string and is required"
+                        },
+                        lastName:{
+                            bsonType:"string",
+                            description: "lastname must be a string and is required"
+                        },
+                        address:{
+                            bsonType: "object",
+                            required: [ "proviance", "city", "addressline","phoneNum" ],
+                            properties:{
+                                proviance:{
+                                    bsonType:"string",
+                                    description: "proviance must be a string and is required" 
+                                },
+                                city:{
+                                    bsonType:"string",
+                                    description: "proviance must be a string and is required" 
+                                },
+                                addressline:{
+                                    bsonType:"string",
+                                    description: "proviance must be a string and is required" 
+                                },
+                                phoneNum:{
+                                    bsonType:"string",
+                                    description: "proviance must be a string and is required" 
+                                }
+                            }
+                        }
+                    }
+                }
+            } ,
+            validationAction :"error",
+            validationLevel :"strict"
+
+    })

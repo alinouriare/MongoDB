@@ -1,0 +1,22 @@
+Backup===>
+Go path folder 
+run
+mongodump
+-------------------------
+mongodump -d zip -o "C:\Users\alino\OneDrive\Desktop\MongoDb\Backup" =======>just one database
+mongodump -d zip -c address -o C:\Users\alino\OneDrive\Desktop\MongoDb\Backup =====> just on collection
+----------------------------------------------
+use zip
+db.dropDatabase()
+-------------------------------------
+path backup~~
+mongorestore --drop
+---------------------------------------------------------
+csv type -f import
+mongoexport -d zip -c zipCol -o "C:\Users\alino\OneDrive\Desktop\MongoDb\Export\zips.json"
+mongoexport -d zip -c zipCol -o "C:\Users\alino\OneDrive\Desktop\MongoDb\Export\1zips.json" --pretty
+mongoexport -d zip -c zipCol -o "C:\Users\alino\OneDrive\Desktop\MongoDb\Export\1zips.json" --pretty -f city
+mongoexport -d zip -c zipCol -o "C:\Users\alino\OneDrive\Desktop\MongoDb\Export\12zips.csv" --pretty -f city --type=csv
+mongoexport -d zip -c zipCol -o "C:\Users\alino\OneDrive\Desktop\MongoDb\Export\1.csv" -f _id,city --type=csv
+mongoimport -d aa -c a "C:\Users\alino\OneDrive\Desktop\MongoDb\Export\1zips.json"
+mongoimport -d aa -c acsv "C:\Users\alino\OneDrive\Desktop\MongoDb\Export\1.csv" --type=csv --headerline

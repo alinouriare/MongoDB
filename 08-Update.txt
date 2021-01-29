@@ -1,0 +1,31 @@
+db.inventory.insertMany( [
+  { item: "journal", status: "A", size: { h: 14, w: 21, uom: "cm" }, instock: [ { warehouse: "A", qty: 5 } ] },
+  { item: "notebook", status: "A",  size: { h: 8.5, w: 11, uom: "in" }, instock: [ { warehouse: "C", qty: 5 } ] },
+  { item: "paper", status: "D", size: { h: 8.5, w: 11, uom: "in" }, instock: [ { warehouse: "A", qty: 60 } ] },
+  { item: "planner", status: "D", size: { h: 22.85, w: 30, uom: "cm" }, instock: [ { warehouse: "A", qty: 40 } ] },
+  { item: "postcard", status: "A", size: { h: 10, w: 15.25, uom: "cm" }, instock: [ { warehouse: "B", qty: 15 }, { warehouse: "C", qty: 35 } ] }
+]);
+-----------------------------------------------
+db.inventory.updateOne({_id:ObjectId("60016fc068d04222450001c3")},{$set:{instock:["B","15"]}})
+again command run====>
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 0 }
+-------------------------------------------------------------------------------------
+ db.inventory.updateOne({_id:ObjectId("60016fc068d04222450001bf")},{$inc:{"size.h":20}}) =====>increase value
+db.inventory.updateOne({_id:ObjectId("60016fc068d04222450001bf")},{$inc:{"size.h":20},$set:{status:"change"}})
+-------------------------------------------------------
+db.inventory.updateOne({_id:ObjectId("60016fc068d04222450001c3")},{$max:{"size.h":11}}) ========>if current value min
+db.inventory.updateOne({_id:ObjectId("60016fc068d04222450001c3")},{$mul:{"size.h":10}})
+-----------------------------------------------------------------------------------------------
+db.inventory.updateOne({_id:ObjectId("60016fc068d04222450001c3")},{$unset:{size:null}})  ===========>remove field
+db.inventory.updateOne({_id:ObjectId("60016fc068d04222450001c3")},{$rename:{item:"changeitem"}}) ============>rename field
+---------------------------------------------------------------------------------------------
+db.inventory.updateOne({"item":"a"},{$set:{name:"ali",age:34}},{upsert:true}) not exista create
+db.inventory.updateMany({"status":"D"},{$set:{"size.isActive":true}})
+db.inventory.updateMany({},{$set:{"name":true}})
+db.inventory.updateMany({"instock.warehouse":"A"},{$set:{"instock.$.aaa":true}})
+db.inventory.updateMany({"instock.warehouse":"A"},{$set:{"instock.$[].test":"aaaaaaa"}})
+db.inventory.updateMany({"status":"D"},{$set:{"instock.$[ee].qty":100}},{arrayFilters:[{"ee.warehouse":"A"}]}) 
+db.inventory.updateOne({_id:ObjectId("60016fc068d04222450001c2")},{$push:{instock:{"warehouse":"aa","qty":5}}})
+db.inventory.updateMany({},{$push:{instock:{$each:[{"warehouse":"aaddd","qty":5},{"warehouse":"aaddd","qty":5}]}}})
+db.inventory.updateOne({_id:ObjectId("60017e934e788d9a06197fc8")},{$addToSet:{instock:{"warehouse":"tekrari"}}}) ===>not repeat
+----------------------------------------------------------------------------------------------

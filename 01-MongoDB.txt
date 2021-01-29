@@ -1,0 +1,27 @@
+https://www.mongodb.com/try/download/community
+C:\Program Files\MongoDB\Server\4.4\bin ====>add path =====>Environment Variables
+Command Prompt ====>mogo =====>Result
+
+Command:
+show dbs ====>list db
+use namedb ===>switch 
+ 
+db.people.insertOne({"firstname":"ali","lattname":"nouri"})=====>create db and doucument
+db.people.insertOne({_id:1,"firstname":"reza","lattname":"akbari"}) ====>by id
+db.people.find() =========> it onther data show
+db.people.find().toArray() =========>all show data
+db.people.find().pretty() ============>ok show
+db.people.find({"firstname":"shahin"}) =========>find where
+---------------------------------------------------------------------
+db.people.insertMany([{"firstname" : "fatemeh1", "lastname" : "nouri" },
+{  "firstname" : "shahin1", "lastname" : "norozian" },
+{  "productName" : "pride1", "model" : 133 },
+{  "productName" : "2061", "model" : "2" }])
+--------------------------------------------------------------------------
+Projection:
+db.people.findOn({},{"firstname":1})
+db.people.find({},{"firstname":1,_id:0})
+---------------------------------------------------------------------------
+db.people.updateMany({"firstname":"ali"},{$set:{city:"tehran"}})
+----------------------------------------------------------------------------
+ db.people.deleteOne({ "firstname":"shahin"})

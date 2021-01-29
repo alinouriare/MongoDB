@@ -1,0 +1,36 @@
+db.version()
+use admin
+db.shutdownServer()
+db.adminCommand({logRotate:1})==>  log remove create new file
+db.runCommand( { compact : 'mycollectionname' } )====>defragment
+db.currentOp()===> info
+db.killOp() ===> opration id from db.currentOp() 
+------------------
+mongostat ====>monitor
+--------------------
+
+create role assign privilage
+-----------------------------
+role current:
+read
+readwriet
+dbadmin ========> not create  user
+useradmin ==========> insert ,create collection ,....
+onweradmin       => dbadmin + useradmin noy AnyDatabase
+
+
+--------------
+Create User:
+show roles
+
+
+mongod --dbpath C:\mogo\file --directoryperdb --wiredTigerDirectoryForIndexes  --logpath C:\mogo\log\log.log --install --auth
+use admin
+db.createUser({user:"admin",pwd:"pass",roles:[{role:"readWrite",db:"admin"},{role:"userAdminAnyDatabase",db:"admin"}]})
+mongo -u admin -p pass --authenticationDatabase admin
+show users
+db.auth("admin","pass")
+show roles
+ db.getUser("admin")
+
+db.createUser({user:"admin",pwd:"pass",roles:[{role:"dbOwner",db:"test"}]})
